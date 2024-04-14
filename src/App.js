@@ -19,7 +19,7 @@ function App() {
     setMessage("");
 
     try {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyYjgxNWQ1Zi1iYjE1LTRmY2UtYWMxMi02MDI5ZmNjZDZhOWIiLCJleHAiOjE3MTMxMTk0MTJ9.cQhLg8udkAj1uXgNLTeRxJEqvx53OIi1vBPJolyZ1uQ'; // Replace with your JWT token
+      const token = ''; // Replace with your JWT token
 
       const response = await axios.post(
         "http://localhost:5000/api/v1/chat/", 
@@ -28,7 +28,7 @@ function App() {
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            //'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         }
