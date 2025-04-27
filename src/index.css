@@ -1,3 +1,12 @@
+#root {
+  height: 100vh; /* Ensure the root takes up full viewport height */
+  width: 100vw;  /* Ensure it takes up the full viewport width */
+  margin: 0;
+  padding: 0;
+  display: flex;  /* Optional: If you want it to be a flex container */
+  flex-direction: column; /* Optional: Make it a column layout */
+}
+
 :root {
   font-family: Söhne, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.5;
@@ -31,83 +40,4 @@ html, body{
 .logo {
   max-width: 100px; /* Adjust the width as needed */
   margin-right: 20px; /* Adjust the margin as needed */
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  /*background-color: #242424;*/
-  background-color: #fff;
-}
-
-main{
-  max-width: 500px;
-  margin: auto;
-}
-
-p{
-  /* background-color: darkslategray; */
-  background-color: #fff;
-  /*max-width: 70%;*/
-  width: 100%;
-  padding: 15px;
-  border-radius: 50px;
-}
-
-p span{
-  /* margin: 5px; */
-}
-
-p span:first-child{
-  margin-right: 0;
-}
-
-.user_msg{
-  /*text-align: right;*/
-  /*margin-left: 30%;*/
-  /*display: flex;*/
-  /*flex-direction: row-reverse;*/
-}
-
-.user_msg .role{
-  margin-left: 90%;
-}
-
-.role {
-  text-transform: capitalize;
-  font-weight: bold;
-}
-
-.hide {
-  visibility: hidden;
-  display: none;
-}
-
-form{
-  text-align: center;
-  position: sticky;
-  bottom: 0;
-}
-
-input{
-  width: 100%;
-  height: 30px;
-  /*border: none;*/
-  border: 1px solid #0d0d0d;
-  padding: 10px;
-  font-size: 1rem;
-  /*background-color: rgb(28, 23, 23);*/
-  background-color: #fff;
-  border-radius: 8px;
-}
-
-input:focus{
-  outline: none;
-}
-
-input::placeholder {
-  color: #676767; /* Black placeholder text */
 }

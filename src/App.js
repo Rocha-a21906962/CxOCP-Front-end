@@ -1,90 +1,40 @@
-import { useState } from "react";
-import axios from "axios";
-import logo from './logo_lusofona.jpg';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Chat from "./components/Auth/Chat";
+import { Login } from "./components/Auth/Login";
+import { Register } from "./components/Auth/Register";
+import { AuthProvider, AuthConsumer } from "./context/JWTAuthContext";
+import { Flex, Spinner } from "@chakra-ui/react";
+import FileUploader from "./components/Auth/FileUploader";
+
 function App() {
-  const [message, setMessage] = useState("");
-  const [chats, setChats] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
-
-  const chat = async (e, message) => {
-    e.preventDefault();
-
-    setIsTyping(true);
-
-    let msgs = chats;
-    msgs.push({ role: "user", content: message });
-    setChats(msgs);
-
-    window.scrollTo(0, 1e10);
-    setMessage("");
-
-    try {
-      const token = ''; // Replace with your JWT token
-
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/chat/", 
-        {
-          message: message
-        },
-        {
-          headers: {
-            //'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-
-      msgs.push(response.data);
-      setChats(msgs);
-      setIsTyping(false);
-      window.scrollTo(0, 1e10);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <main>
-
-      <div className="logo-and-heading-container">
-        <img src={logo} alt="Logo" className="logo" />
-        <h1>CxOCP Chatbot</h1>
-      </div>
-
-      <section>
-        {chats && chats.length ? (
-          chats.map((chat, index) => (
-            <p
-              key={index} // Use index instead of chat.index to avoid potential issues
-              className={chat.role === "user" ? "user_msg" : ""}
-            >
-              <span className="role">{chat.role}</span>
-              <br></br>
-              <br/>
-              <span className="content" dangerouslySetInnerHTML={{__html: chat.content.replace(/\n/g, "<br />")}}/>
-            </p>
-          ))
-        ) : (
-          ""
-        )}
-      </section>
-
-      <div className={isTyping ? "" : "hide"}>
-        <p>
-          <i>Typing...</i>
-        </p>
-      </div>
-
-      <form onSubmit={(e) => chat(e, message)}>
-        <input
-          type={"text"}
-          name={"message"}
-          value={message}
-          placeholder={"Type a message and hit enter"}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-      </form>
-    </main>
+    <AuthProvider>
+      <Router>
+        <AuthConsumer>
+          {(auth) => !auth.isInitialized ? (
+            <Flex 
+              height={"100vh"} 
+              align={"center"} 
+              justifyContent={"center"}>
+              <Spinner 
+                thickness={"4px"}
+                speed={"0.65s"}
+                color={"green.200"}
+                size={"xl"}
+              />
+            </Flex>
+          ):(<Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/uploader" element={<FileUploader />} />
+            <Route path="*" element={<Navigate to={"/"}/>} />
+          </Routes>
+          )
+          }
+        </AuthConsumer>
+      </Router>
+    </AuthProvider>
   );
 }
 
