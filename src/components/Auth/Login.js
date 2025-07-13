@@ -23,7 +23,7 @@ export const Login = () => {
     const onSubmit = async (values) => {
       try {
         // Send credentials to the backend to get the JWT token
-        const response = await axios.post("http://localhost:5000/api/v1/auth/login", {
+        const response = await axios.post("http://localhost:5671/api/v1/auth/login", {
           username: values.username,
           password: values.password,
         });
